@@ -244,8 +244,13 @@ import android.os.Bundle;
 
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -267,138 +272,152 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private  Gson gson;
-    private TextView textView;
+    private TextView chat;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView=findViewById(R.id.showMessage);
-
-
-
-
-        new Thread(new Runnable() {
+        toolbar=findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+     chat=findViewById(R.id.chat);
+        chat.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                try {
-
-                    while(!Thread.interrupted()) {
-                        OkHttpClient client = new OkHttpClient();//
-                        RequestBody requestBody = new FormBody.Builder().add("selfId", LoginActivity.id + "").build();
-
-//                     //final String responseData;
-                        Request request = new Request.Builder().url("http://192.168.32.1:88/message")
-                                .post(requestBody)
-                                .build();
-                        Response response = client.newCall(request).execute();
-                        String responseData = response.body().string();
-                        gson = new Gson();
-                        String s;
-                        ArrayList<Message> amsg = gson.fromJson(responseData, new TypeToken<ArrayList<Message>>() {
-                        }.getType());
-                        for (int i = 0; i < amsg.size(); i++) {
-                            Message msg = amsg.get(i);//得到消息中的一个
-                            Log.v("message", msg.toString());//
-
-                            s = "发送者：" + msg.getSender() + "msg:" + msg.getMsg();
-                            showResponse(s);
-                        }
-
-
-//                    if(result.equals("false")) //用户名
-//                    {
-//                        showResponse("用户名或密码输入错误，请重新输入。");
-//                    }
-//                    else{
-//                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-                        Thread.sleep(2000);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-
-
-
-
-
-
-
-
-
-    }
-
-
-    private void sendRequestWithOkHttp() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-
-                    while(!Thread.interrupted()) {
-
-
-                        OkHttpClient client = new OkHttpClient();
-                        RequestBody requestBody = new FormBody.Builder().add("selfId", LoginActivity.id + "").build();
-
-//                     //final String responseData;
-                        Request request = new Request.Builder().url("http://192.168.32.1:88/message")
-                                .post(requestBody)
-                                .build();
-
-
-                        Response response = client.newCall(request).execute();
-                        String responseData = response.body().string();
-
-                        gson = new Gson();
-
-                        // ArrayList<Message> msgList = new ArrayList<Message>();
-                        String s;
-                        ArrayList<Message> amsg = gson.fromJson(responseData, new TypeToken<ArrayList<Message>>() {
-                        }.getType());
-                        for (int i = 0; i < amsg.size(); i++) {
-                            Message msg = amsg.get(i);//得到消息中的一个
-                            Log.v("message", msg.toString());//
-
-                            s = "发送者：" + msg.getSender() + "msg:" + msg.getMsg();
-                            showResponse(s);
-                        }
-
-
-//                    if(result.equals("false")) //用户名
-//                    {
-//                        showResponse("用户名或密码输入错误，请重新输入。");
-//                    }
-//                    else{
-//                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-                        Thread.sleep(2000);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-
-    private void showResponse(final String response) {
-        runOnUiThread(new Runnable() { //UI线程上运行
-            @Override
-            public void run() {
-                textView.setText(response);
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,MessageActivity.class);
+                startActivity(intent);
             }
         });
+
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//
+//                    while(!Thread.interrupted()) {
+//                        OkHttpClient client = new OkHttpClient();//
+//                        RequestBody requestBody = new FormBody.Builder().add("selfId", LoginActivity.id + "").build();
+//
+////                     //final String responseData;
+//                        Request request = new Request.Builder().url("http://169.254.95.245:88/message")
+//                                .post(requestBody)
+//                                .build();
+//                        Response response = client.newCall(request).execute();
+//                        String responseData = response.body().string();
+//                        gson = new Gson();
+//                        String s;
+//                        ArrayList<Message> amsg = gson.fromJson(responseData, new TypeToken<ArrayList<Message>>() {
+//                        }.getType());
+//                        for (int i = 0; i < amsg.size(); i++) {
+//                            Message msg = amsg.get(i);//得到消息中的一个
+//                            Log.v("message", msg.toString());//
+//
+//                            s = "发送者：" + msg.getSender() + "msg:" + msg.getMsg();
+//                            showResponse(s);
+//                        }
+//
+//                        Thread.sleep(2000);
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar,menu);//设置菜单的布局
+        return super.onCreateOptionsMenu(menu);//调用父类的方法创造这个菜单
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.add:
+               Intent intent=new Intent(MainActivity.this,SearchActivity.class);
+               startActivity(intent);
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+
+
+
+//    private void sendRequestWithOkHttp() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//
+//                    while(!Thread.interrupted()) {
+//
+//
+//                        OkHttpClient client = new OkHttpClient();
+//                        RequestBody requestBody = new FormBody.Builder().add("selfId", LoginActivity.id + "").build();
+//
+////                     //final String responseData;
+//                        Request request = new Request.Builder().url("http://192.168.32.1:88/message")
+//                                .post(requestBody)
+//                                .build();
+//
+//
+//                        Response response = client.newCall(request).execute();
+//                        String responseData = response.body().string();
+//
+//                        gson = new Gson();
+//
+//                        // ArrayList<Message> msgList = new ArrayList<Message>();
+//                        String s;
+//                        ArrayList<Message> amsg = gson.fromJson(responseData, new TypeToken<ArrayList<Message>>() {
+//                        }.getType());
+//                        for (int i = 0; i < amsg.size(); i++) {
+//                            Message msg = amsg.get(i);//得到消息中的一个
+//                            Log.v("message", msg.toString());//
+//
+//                            s = "发送者：" + msg.getSender() + "msg:" + msg.getMsg();
+//                            showResponse(s);
+//                        }
+//
+//
+////                    if(result.equals("false")) //用户名
+////                    {
+////                        showResponse("用户名或密码输入错误，请重新输入。");
+////                    }
+////                    else{
+////                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+////                        startActivity(intent);
+////                        finish();
+////                    }
+//                        Thread.sleep(2000);
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//    }
+
+
+//    private void showResponse(final String response) {
+//        runOnUiThread(new Runnable() { //UI线程上运行
+//            @Override
+//            public void run() {
+//                textView.setText(response);
+//            }
+//        });
+//    }
 
 
 }

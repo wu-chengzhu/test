@@ -103,15 +103,14 @@ public class RegisterActivity extends AppCompatActivity  {
                             add("pass", password).build();
 
 //                     //final String responseData;
-                    Request request = new Request.Builder().url("http://192.168.32.1:88/register")
+                    Request request = new Request.Builder().url("http://169.254.95.245:88/register")
                             .post(requestBody)
                             .build();
 
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
 
-
-                      Gson gson=new GsonBuilder().create();
+                    Gson gson=new GsonBuilder().create();
                     Boolean result=gson.fromJson(responseData,Boolean.class);
                     if(result==false) //用户名
                     {
