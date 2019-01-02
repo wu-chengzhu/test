@@ -2,14 +2,13 @@ package com.example.gp62.test.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.gp62.test.Msg;
+import com.example.gp62.test.Entity.Msg;
 import com.example.gp62.test.R;
 
 import java.util.List;

@@ -205,8 +205,8 @@ public class LoginActivity extends AppCompatActivity {
 //        Map<String,String> map=new HashMap<>();
 //        map.put("user",username);
 //        map.put("pass",password);
-//        String url=HttpUtil.BASE_URL;
-//        return new String(HttpUtil.postRequest(url,map));
+//
+//
 //    }
 
 

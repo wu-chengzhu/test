@@ -1,10 +1,22 @@
+package com.example.gp62.test.Entity;
 
-package com.example.gp62.test;
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
-public class Message implements Serializable {
+public class Message implements Serializable,Comparable<Message> {
     private  int sender;
     private  int receiver;
+    private String sendName;
+
+    public String getSendName() {
+        return sendName;
+    }
+
+    public void setSendName(String sendName) {
+        this.sendName = sendName;
+    }
+
     private String msg;
 
 
@@ -37,7 +49,14 @@ public class Message implements Serializable {
         return "Message{" +
                 "sender=" + sender +
                 ", receiver=" + receiver +
+                ", sendName='" + sendName + '\'' +
                 ", msg='" + msg + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(@NonNull Message msg) {
+        return (this.getSender()-msg.getSender());
     }
 }

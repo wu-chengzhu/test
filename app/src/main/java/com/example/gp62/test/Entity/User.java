@@ -1,4 +1,4 @@
-package com.example.gp62.test;
+package com.example.gp62.test.Entity;
 
 import java.io.Serializable;
 

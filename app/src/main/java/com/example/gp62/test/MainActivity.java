@@ -192,16 +192,7 @@ package com.example.gp62.test;//package com.example.gp62.test;
 ////
 ////    }
 //
-////    private String query(String username,String password)throws  Exception
-////    {
-////        Map<String,String> map=new HashMap<>();
-////        map.put("user",username);
-////        map.put("pass",password);
-////        String url=HttpUtil.BASE_URL;
-////        return new String(HttpUtil.postRequest(url,map));
-////    }
-//
-//
+////
 //
 ////    public void SendByHttpClient(final String id,final String pw){
 ////        new Thread(new Runnable() {
@@ -241,7 +232,6 @@ package com.example.gp62.test;//package com.example.gp62.test;
 import com.example.gp62.test.Fragment.ContactsFragment;
 import com.example.gp62.test.Fragment.MeFragment;
 import com.example.gp62.test.Fragment.NewsFragment;
-import com.example.gp62.test.Message;
 
 
 import android.content.Intent;
@@ -255,30 +245,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -416,7 +388,7 @@ public class MainActivity extends AppCompatActivity {
 //                            Message msg = amsg.get(i);//得到消息中的一个
 //                            Log.v("message", msg.toString());//
 //
-//                            s = "发送者：" + msg.getSender() + "msg:" + msg.getMsg();
+//                            s = "发送者：" + msg.getSendName() + "msg:" + msg.getMsg();
 //                            showResponse(s);
 //                        }
 //
@@ -438,8 +410,8 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }).start();
 //    }
-
-
+//
+//
 //    private void showResponse(final String response) {
 //        runOnUiThread(new Runnable() { //UI线程上运行
 //            @Override
