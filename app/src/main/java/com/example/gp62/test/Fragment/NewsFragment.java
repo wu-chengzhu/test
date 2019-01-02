@@ -157,14 +157,15 @@ public class NewsFragment extends Fragment {
                         for (int i = 0; i < amsg.size(); i++) {
                             Message msg = amsg.get(i);//得到消息中的一个
                             Log.v("message", msg.toString());//
-//                            android.os.Message message=new android.os.Message();
-//                            message.what=0x123;
-//                            Bundle bundle=new Bundle();
-//                            bundle.putString("msg",msg.getMsg());
-//                            message.setData(bundle);
+                            android.os.Message message=new android.os.Message();
+                            message.what=0x123;
+                            Bundle bundle=new Bundle();
+                            bundle.putString("msg",msg.getMsg());
+                            message.setData(bundle);
+                            MessageActivity.handler.sendMessage(message);
 //
 //                            showResponse(s);
-                           MessageActivity.msgList.add(new Msg(msg.getMsg(),Msg.TYPE_RECEIVED));
+                          // MessageActivity.msgList.add(new Msg(msg.getMsg(),Msg.TYPE_RECEIVED));
 //                            MessageActivity.adapter.notifyItemInserted(MessageActivity.msgList.size()-1);//当有新消息时，刷新ListView中的显示
 //                            MessageActivity.msgRecyclerView.scrollToPosition(MessageActivity.msgList.size()-1);//将ListView定位到最后一行
 

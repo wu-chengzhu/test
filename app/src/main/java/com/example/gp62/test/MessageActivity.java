@@ -36,21 +36,19 @@ public class MessageActivity extends AppCompatActivity {
         private Button send;
         public static RecyclerView msgRecyclerView;
         public static MsgAdapter adapter;
-
-
-
-//        public Handler handler=new Handler() {
-//        public void handleMessage(android.os.Message msg)
-//        {
-//           if(msg.what==0x123)
-//           {
-//               String message=msg.getData().toString();
-//               msgList.add(new Msg(message,Msg.TYPE_RECEIVED));
-//        adapter.notifyItemInserted(MessageActivity.msgList.size()-1);//当有新消息时，刷新ListView中的显示
-//        msgRecyclerView.scrollToPosition(MessageActivity.msgList.size()-1);//将ListView定位到最后一行
-//            }
-//        }
-//    };
+         public static Handler  handler=new Handler() {
+        public void handleMessage(android.os.Message msg)
+        {
+           if(msg.what==0x123)
+           {
+               Bundle bundle=msg.getData();
+               String message=bundle.getString("msg");
+               msgList.add(new Msg(message,Msg.TYPE_RECEIVED));
+        adapter.notifyItemInserted(MessageActivity.msgList.size()-1);//当有新消息时，刷新ListView中的显示
+        msgRecyclerView.scrollToPosition(MessageActivity.msgList.size()-1);//将ListView定位到最后一行
+            }
+        }
+    };
 
 
 
