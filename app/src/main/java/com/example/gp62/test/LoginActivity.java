@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                     RequestBody body = RequestBody.create(JSON, json);//创建一个请求对象，里面包含json数据类型的数据
 //
 //                     //final String responseData;
-                    Request request = new Request.Builder().url("http://169.254.95.245:88/Login")
+                    Request request = new Request.Builder().url("http://192.168.32.1:88/Login")
                             .post(body)//把数据传给服务器
                             .build();
 

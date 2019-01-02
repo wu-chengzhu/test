@@ -73,7 +73,7 @@ public class SearchActivity extends AppCompatActivity {
                     RequestBody requestBody = new FormBody.Builder().add("friendName",searchName).build();
 
 //                     //final String responseData;
-                    Request request = new Request.Builder().url("http://169.254.95.245:88/addfriend")
+                    Request request = new Request.Builder().url("http://192.168.32.1:88/addfriend")
                             .post(requestBody)
                             .build();
 

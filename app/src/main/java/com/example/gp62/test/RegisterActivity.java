@@ -103,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity  {
                             add("pass", password).build();
 
 //                     //final String responseData;
-                    Request request = new Request.Builder().url("http://169.254.95.245:88/register")
+                    Request request = new Request.Builder().url("http://192.168.32.1:88/register")
                             .post(requestBody)
                             .build();
 

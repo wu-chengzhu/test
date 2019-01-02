@@ -44,7 +44,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
                     OkHttpClient client = new OkHttpClient();//建造一个对象
                     RequestBody requestBody = new FormBody.Builder().add("userid", LoginActivity.id+"").build();
-                    Request request = new Request.Builder().url("http://169.254.95.245:88/addfriend")
+                    Request request = new Request.Builder().url("http://192.168.32.1:88/addfriend")
                             .post(requestBody)
                             .build();
                     Response response = client.newCall(request).execute();
